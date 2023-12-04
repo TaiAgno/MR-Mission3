@@ -25,7 +25,16 @@ jobs:
         run: |
           npm install
           npm run build --if-present
-          npm run test --if-present
+          npm run test --if-present --coverage
+
+      - name: Print coverage report
+        run: cat coverage/lcov-report/*
+
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v3
+        with:
+          name: code-coverage-report
+          path: coverage/lcov-report/*
 
       - name: Zip artifact for deployment
         run: zip release.zip ./* -r
