@@ -13,7 +13,7 @@ Unit tests for "matcher.js" have been integrated in the automation and are runni
 
 SELF-DISCLAIMER
 
-This is up and running solely thanks to stubborness.
+This is up and running solely thanks to stubbornness.
 
 ## Getting Started
 
