@@ -1,48 +1,22 @@
 // imports all necessary packages and dependencies
 const dotenv = require('dotenv');
 const cors = require('cors');
-const util = require('util');
 const fs = require('fs');
-const msRest = require('@azure/ms-rest-js');
 const axios = require('axios');
 const express = require('express');
 const multer = require('multer');
 const FormData = require('form-data');
 const path = require('path');
+const upload = multer({ dest: 'uploads/' });
+const { matchImageWithPrediction } = require('./matcher.js');
 
 dotenv.config();
 
-const { TrainingAPIClient } = require("@azure/cognitiveservices-customvision-training");
-const { PredictionAPIClient } = require("@azure/cognitiveservices-customvision-prediction");
-const { matchImageWithPrediction } = require('./matcher.js');
-
 // sets all required variables
 const PORT = process.env.PORT || 8080;
-const publishIterationName = "carMatcher";
-const setTimeoutPromise = util.promisify(setTimeout);
-
-const trainingKey = process.env["VISION_TRAINING_KEY"];
-const trainingEndpoint = process.env["VISION_TRAINING_ENDPOINT"];
-const predictionKey = process.env["VISION_PREDICTION_KEY"];
-const predictionResourceId = process.env["VISION_PREDICTION_RESOURCE_ID"];
-const predictionEndpoint = process.env["VISION_PREDICTION_ENDPOINT"];
-const projectID = process.env["PROJECT_ID"];
-
-const trainingCredentials = new msRest.ApiKeyCredentials({ inHeader: { "Training-key": trainingKey } });
-const predictionCredentials = new msRest.ApiKeyCredentials({ inHeader: { "Prediction-key": predictionKey } });
-const trainer = new TrainingAPIClient(trainingCredentials, trainingEndpoint);
-const predictor = new PredictionAPIClient(predictionCredentials, predictionEndpoint);
 
 const server = express();
 server.use(cors({ origin: '*' }));
-
-server.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    next();
-});
-
-const upload = multer({ dest: 'uploads/' });
 
 // establishes server endpoint
 server.post('/upload', upload.single('image'), async (req, res) => {

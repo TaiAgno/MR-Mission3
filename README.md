@@ -24,13 +24,12 @@ This is up and running solely thanks to stubbornness.
 * Multer
 * Axios
 * Dotenv
-* ES Modules
 * Cors
 * Custom Vision
 
 ### Installing
 
-* npm install express multer axios esm cors dotenv jest
+* npm install express multer axios cors dotenv jest
 * npm install @azure/cognitiveservices-customvision-training
 * npm install @azure/cognitiveservices-customvision-prediction
 * npm install @azure/ms-rest-js
