@@ -20,13 +20,13 @@ server.use(cors({ origin: '*' }));
 
 // establishes server endpoint
 server.post('/upload', upload.single('image'), async (req, res) => {
+    // check if the file was uploaded
     if (!req.file) {
         return res.status(400).send('No file was uploaded.');
     }
 
     // check if the uploaded file is an image
     if (!req.file.mimetype.startsWith('image/')) {
-        console.error("Uploaded file is not an image.");
         return res.json({ error: "Incorrect data type", comment: "Please upload an image" });
     }
 
@@ -51,10 +51,10 @@ server.post('/upload', upload.single('image'), async (req, res) => {
     }
 });
 
-// Serve static files from the public directory
+// serve static files from the public directory
 server.use(express.static(path.join(__dirname, 'public')));
 
-// If no matching route is found default to home
+// if no matching route is found - default to home
 server.get('*', (req, res) => {
   res.sendFile('index.html', { root: path.join(__dirname, 'public') });
 });

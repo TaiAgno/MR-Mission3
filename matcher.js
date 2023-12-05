@@ -50,7 +50,7 @@ function matchImageWithPrediction(prediction) {
         return { error: NO_MATCH_FOUND, comment: "Sorry, we do not sell that." };
     } 
 
-    // return the information associated with the matched car type
+    // return the information associated with the matched car type to be displayed in the client side
     return {
         carType: tagName,
         imageUrl: predictionDetails[tagName].imageUrl,
