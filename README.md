@@ -45,7 +45,7 @@ This is up and running solely thanks to stubbornness.
 ### Errors
 
 * No errors identified up to this stage.
-* It would be benefitial to traing Custom Vision further.
+* It would be beneficial to train Custom Vision further.
 
 ## Review
 
